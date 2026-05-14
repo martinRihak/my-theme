@@ -1,31 +1,114 @@
-@define-color background rgba(0, 0, 0, 0);
-@define-color waybarBg rgba(38,38,38,0.3);
+@define-color background      rgba(0, 0, 0, 0);
+@define-color waybarBg        rgba(38, 38, 38, 0.3);
+@define-color menuBg          #262626;
+@define-color menuHover       #404040;
 @define-color foreground      #e6e6e6;
 @define-color surface         #404040;
 @define-color inactive        #404040;
-
 @define-color accent_orange   #e65c5c;
 @define-color accent_green    #9ece6a;
 @define-color accent_blue     #7aa2f7;
+@define-color accent_yellow   #fabd2f;
 @define-color accent_critical #e65c5c;
 
-p{
-  color: #e6e6e6;
+
+/* ========================================================================
+   GLOBAL RESET
+   ======================================================================== */
+* {
+  background-color: @background;
+  color: @foreground;
+  border: none;
+  border-radius: 0;
+  min-height: 0;
+  font-family: 'JetBrainsMono Nerd Font';
+  font-size: 12px;
+}
+
+p {
+  color: @foreground;
+}
+
+/* ========================================================================
+   WAYBAR CONTAINER
+   ======================================================================== */
+#waybar {
+  background-color: @waybarBg;
+  border-radius: 15px;
+  padding: 2px 10px;
+  margin: 0 0px;
 }
 
 .modules-left,
 .modules-center,
 .modules-right {
-
-}
-#waybar {
-    background-color: @waybarBg; /* Vaše barva pozadí (např. Catppuccin) */
-/*    border: 1px solid white;*/
-    border-radius: 15px;
-    padding: 2px 10px;
-    margin: 0 0px;
 }
 
+.modules-left {
+  margin-left: 8px;
+}
+
+.modules-right {
+  margin-right: 8px;
+}
+
+.hidden {
+  opacity: 0;
+}
+
+/* ========================================================================
+   WORKSPACES
+   ======================================================================== */
+#workspaces button {
+  all: initial;
+  padding: 0 6px;
+  margin: 0 1.5px;
+  min-width: 9px;
+}
+
+#workspaces button.empty {
+  opacity: 0.5;
+}
+
+/* ========================================================================
+   GENERIC MODULES SPACING
+   ======================================================================== */
+#cpu,
+#battery,
+#pulseaudio,
+#custom-omarchy,
+#custom-update {
+  min-width: 12px;
+  margin: 0 7.5px;
+}
+
+#tray {
+  margin-right: 16px;
+}
+
+#bluetooth {
+  margin-right: 17px;
+}
+
+#network {
+  margin-right: 13px;
+}
+
+#custom-expand-icon {
+  margin-right: 18px;
+}
+
+#clock {
+  margin-left: 5px;
+}
+
+#custom-update {
+  font-size: 10px;
+}
+
+/* ========================================================================
+   BATTERY STATES
+   ======================================================================== */
 #battery.charging,
 #battery.plugged {
   color: @accent_green;
@@ -39,6 +122,9 @@ p{
   color: @accent_critical;
 }
 
+/* ========================================================================
+   AUDIO / NETWORK STATES
+   ======================================================================== */
 #pulseaudio.muted {
   color: @accent_critical;
 }
@@ -47,11 +133,91 @@ p{
   color: @accent_critical;
 }
 
+/* ========================================================================
+   INDICATORS (recording, idle, notifications)
+   ======================================================================== */
+#custom-screenrecording-indicator,
+#custom-idle-indicator,
+#custom-notification-silencing-indicator {
+  min-width: 12px;
+  margin-left: 5px;
+  margin-right: 0;
+  font-size: 10px;
+  padding-bottom: 1px;
+}
+
+#custom-screenrecording-indicator.active {
+  color: #a55555;
+}
+
+#custom-voxtype {
+  min-width: 12px;
+  margin: 0 0 0 7.5px;
+}
+
+#custom-voxtype.recording {
+  color: #a55555;
+}
+
+#custom-idle-indicator.active,
+#custom-notification-silencing-indicator.active {
+  color: #a55555;
+}
+
+/* ========================================================================
+   WEATHER
+   ======================================================================== */
+#custom-weather {
+  margin-left: 7.5px;
+  margin-right: 7.5px;
+}
+
+#custom-weather.unavailable {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+}
+
+/* ========================================================================
+   TOOLTIPS
+   ======================================================================== */
 tooltip {
-  border-radius: 30px;
-  border: 1px solid @inactive;
+  background-color: @menuBg;
+  border-radius: 8px;
+  border: 2px solid rgba(0, 0, 0, 0.4);
+  box-shadow: none;
+  padding: 2px;
 }
 
 tooltip label {
+  background-color: transparent;
   color: @foreground;
+  padding: 4px 6px;
+}
+
+/* ========================================================================
+   TRAY MENU - jednotné neprůhledné pozadí
+   ======================================================================== */
+menu {
+  background-color: @menuBg;
+  border-radius: 8px;
+  border: 2px solid rgba(0, 0, 0, 0.4);
+  box-shadow: none;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  color: @foreground;
+}
+
+menu menuitem,
+menuitem {
+  background-color: @menuBg;
+  color: @foreground;
+  padding: 4px 12px;
+  margin-left: 2px;
+  margin-right: 2px;
+}
+
+
+decoration {
+  box-shadow: none;
 }
